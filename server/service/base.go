@@ -18,7 +18,7 @@ func (baseservice *BaseService) SendEmailVerificationCode(c *gin.Context, to str
 	expireTime := time.Now().Add(5 * time.Minute).Unix()
 
 	session := sessions.Default(c)
-	session.Set("varification_code", verificationCode)
+	session.Set("verification_code", verificationCode)
 	session.Set("email", to)
 	session.Set("expire_time", expireTime)
 	_ = session.Save()

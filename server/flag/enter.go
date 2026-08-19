@@ -35,6 +35,10 @@ var (
 		Name:  "es-import",
 		Usage: "Imports data into Elasticsearch from a specified file.",
 	}
+	adminFlag = &cli.BoolFlag{
+		Name:  "admin",
+		Usage: "Creates an administrator using the name, email and address specified in the config.yaml file.",
+	}
 )
 
 func Run(c *cli.Context) {
@@ -90,6 +94,13 @@ func Run(c *cli.Context) {
 		} else {
 			global.Log.Info(fmt.Sprintf("Successfully imported ES data, totaling %d records", num))
 		}
+	case c.Bool(adminFlag.Name):
+		// 创建管理员
+		if err := Admin(); err != nil {
+			global.Log.Error("创建管理员失败：", zap.Error(err))
+		} else {
+			global.Log.Info("Successfully created an administrator")
+		}
 	default:
 		err := cli.NewExitError("无效的参数", 1)
 		global.Log.Error("无效的参数：", zap.Error(err))
@@ -106,6 +117,7 @@ func NewApp() *cli.App {
 		esFlag,
 		esExportFlag,
 		esImportFlag,
+		adminFlag,
 	}
 	app.Action = Run
 	return app
