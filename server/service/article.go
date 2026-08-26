@@ -203,7 +203,16 @@ func (articleService *ArticleService) ArticleDelete(req request.ArticleDelete) e
 			if err := utils.InitImagesCategory(tx, illustrations); err != nil {
 				return err
 			}
-			// TODO 同时删除该文章下的所有评论
+			// 同时删除该文章下的所有评论
+			comments, err := ServiceGroupApp.CommentService.CommentInfoByArticleID(request.CommentInfoByArticleID{ArticleID: id})
+			if err != nil {
+				return err
+			}
+			for _, comment := range comments {
+				if err := ServiceGroupApp.CommentService.DeleteCommentAndChildren(tx, comment.ID); err != nil {
+					return err
+				}
+			}
 		}
 		return articleService.Delete(req.IDs)
 	})
@@ -274,6 +283,13 @@ func (articleService *ArticleService) ArticleList(info request.ArticleList) (lis
 	// 根据简介查询
 	if info.Abstract != nil {
 		boolQuery.Must = append(boolQuery.Must, types.Query{Match: map[string]types.MatchQuery{"abstract": {Query: *info.Abstract}}})
+	}
+
+	// 将 boolQuery 赋给 req.Query，否则会发送空的 query 对象导致 "empty clause" 报错
+	if boolQuery.Must != nil {
+		req.Query.Bool = boolQuery
+	} else {
+		req.Query.MatchAll = &types.MatchAllQuery{}
 	}
 
 	option := other.EsOption{
