@@ -16,6 +16,7 @@ import (
 	"github.com/elastic/go-elasticsearch/v8/typedapi/core/search"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types"
 	"github.com/elastic/go-elasticsearch/v8/typedapi/types/enums/scriptlanguage"
+	"github.com/elastic/go-elasticsearch/v8/typedapi/types/enums/sortorder"
 	"gorm.io/gorm"
 )
 
@@ -62,6 +63,13 @@ func (articleService *ArticleService) ArticleSearch(info request.ArticleSearch) 
 		req.Query.MatchAll = &types.MatchAllQuery{}
 	}
 
+	req.Sort = []types.SortCombinations{
+		types.SortOptions{
+			SortOptions: map[string]types.FieldSort{
+				"created_at": {Order: &sortorder.Desc},
+			},
+		},
+	}
 	option := other.EsOption{
 		PageInfo:       info.PageInfo,
 		Index:          elasticsearch.ArticleIndex(),
@@ -290,6 +298,14 @@ func (articleService *ArticleService) ArticleList(info request.ArticleList) (lis
 		req.Query.Bool = boolQuery
 	} else {
 		req.Query.MatchAll = &types.MatchAllQuery{}
+	}
+
+	req.Sort = []types.SortCombinations{
+		types.SortOptions{
+			SortOptions: map[string]types.FieldSort{
+				"created_at": {Order: &sortorder.Desc},
+			},
+		},
 	}
 
 	option := other.EsOption{
