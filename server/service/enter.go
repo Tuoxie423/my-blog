@@ -11,6 +11,9 @@ type ServiceGroup struct {
 	ArticleService
 	CommentService
 	FeedbackService
+	WebsiteService
+	HotService
+	ConfigService
 }
 
 var ServiceGroupApp = new(ServiceGroup)

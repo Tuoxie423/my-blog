@@ -31,15 +31,17 @@ func InitRouter() *gin.Engine {
 	adminGroup.Use(middleware.JWTAuth()).Use(middleware.AdminAuth())
 	{
 		routerGroup.InitBaseRouter(publicGroup)
+		routerGroup.InitHotRouter(publicGroup)
 	}
 	{
 		routerGroup.InitUserRouter(privateGroup, publicGroup, adminGroup)
 		routerGroup.InitArticleRouter(privateGroup, publicGroup, adminGroup)
 		routerGroup.InitCommentRouter(privateGroup, publicGroup, adminGroup)
 		routerGroup.InitFeedbackRouter(privateGroup, publicGroup, adminGroup)
-
 	}
 	{
+		routerGroup.InitWebsiteRouter(adminGroup, publicGroup)
+		routerGroup.InitConfigRouter(adminGroup)
 		routerGroup.InitImageRouter(adminGroup)
 	}
 	return Router

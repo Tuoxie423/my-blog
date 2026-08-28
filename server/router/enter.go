@@ -7,6 +7,9 @@ type RouterGroup struct {
 	ArticleRouter
 	CommentRouter
 	FeedbackRouter
+	WebsiteRouter
+	HotRouter
+	ConfigRouter
 }
 
 var RouterGroupApp = new(RouterGroup)

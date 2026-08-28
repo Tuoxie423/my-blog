@@ -16,7 +16,7 @@ func LoadYaml() ([]byte, error) {
 	return os.ReadFile(path)
 }
 
-func SaveYaml() error {
+func SaveYAML() error {
 	byteData, err := yaml.Marshal(global.Config)
 	if err != nil {
 		return err
