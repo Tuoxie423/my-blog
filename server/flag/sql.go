@@ -7,7 +7,6 @@ import (
 
 func SQL() error {
 	return global.DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(
-		&database.Advertisement{},
 		&database.ArticleLike{},
 		&database.ArticleTag{},
 		&database.Comment{},
@@ -18,5 +17,6 @@ func SQL() error {
 		&database.JwtBlacklist{},
 		&database.Login{},
 		&database.User{},
+		&database.Murmur{},
 	)
 }

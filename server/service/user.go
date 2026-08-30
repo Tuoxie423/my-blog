@@ -140,6 +140,10 @@ func (userService *UserService) UserChangeInfo(req request.UserChangeInfo) error
 }
 
 func (userService *UserService) UserWeather(ip string) (string, error) {
+	// 高德服务未开启时，直接返回错误
+	if !global.Config.Gaode.Enable {
+		return "", errors.New("gaode service is disabled")
+	}
 	// 从redis中获取天气数据，如果没有数据，则调用高德api进行查询
 	result, err := global.Redis.Get("weather-" + ip).Result()
 	if err != nil {

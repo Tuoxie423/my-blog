@@ -59,6 +59,10 @@ func LoginRecord() gin.HandlerFunc {
 
 // 获取IP地址对应的地理位置信息
 func getAddressFromIP(ip string, gaodeService service.GaodeService) string {
+	// 高德服务未开启时，直接返回未知
+	if !global.Config.Gaode.Enable {
+		return "未知"
+	}
 	res, err := gaodeService.GetLocationByIP(ip)
 	if err != nil || res.Province == "" {
 		return "未知"

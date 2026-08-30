@@ -12,6 +12,7 @@ type ApiGroup struct {
 	WebsiteApi
 	HotApi
 	ConfigApi
+	MurmurApi
 }
 
 var ApiGroupApp = new(ApiGroup)
@@ -27,3 +28,4 @@ var feedbackService = service.ServiceGroupApp.FeedbackService
 var websiteService = service.ServiceGroupApp.WebsiteService
 var hotService = service.ServiceGroupApp.HotService
 var configService = service.ServiceGroupApp.ConfigService
+var murmurService = service.ServiceGroupApp.MurmurService

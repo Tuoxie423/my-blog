@@ -10,6 +10,7 @@ type RouterGroup struct {
 	WebsiteRouter
 	HotRouter
 	ConfigRouter
+	MurmurRouter
 }
 
 var RouterGroupApp = new(RouterGroup)

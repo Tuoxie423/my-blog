@@ -14,6 +14,7 @@ type ServiceGroup struct {
 	WebsiteService
 	HotService
 	ConfigService
+	MurmurService
 }
 
 var ServiceGroupApp = new(ServiceGroup)
