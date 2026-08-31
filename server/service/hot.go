@@ -45,7 +45,7 @@ func (hotService *HotService) fetchAndCache(p config.HotPlatform) (response.Plat
 	ph := response.PlatformHot{
 		Type: data.Type,
 		Name: p.Name,
-		Icon: p.Icon,
+		Icon: "/" + global.Config.Upload.Path + "/image/" + p.Icon,
 		List: data.List,
 	}
 

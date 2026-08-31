@@ -85,6 +85,7 @@ func (userApi *UserApi) EmailLogin(c *gin.Context) {
 		}
 
 		userApi.TokenNext(c, user)
+		return
 	}
 	response.FailWithMessage("Incorrect verification code", c)
 }

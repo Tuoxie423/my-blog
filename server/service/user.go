@@ -25,7 +25,7 @@ func (userService *UserService) Register(u database.User) (database.User, error)
 
 	u.Password = utils.BcryptHash(u.Password)
 	u.UUID = uuid.Must(uuid.NewV4())
-	u.Avatar = "/image/avatar.jpg"
+	u.Avatar = "/image/avatar.png"
 	u.RoleID = appTypes.User
 	u.Register = appTypes.Email
 

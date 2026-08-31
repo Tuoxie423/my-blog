@@ -30,6 +30,9 @@ func LoginRecord() gin.HandlerFunc {
 					userID = id
 				}
 			}
+			if userID == 0 {
+				return
+			}
 
 			// 获取用户IP的地理位置
 			address = getAddressFromIP(ip, gaodeService)

@@ -71,7 +71,7 @@ func Admin() error {
 	user.Username = global.Config.Website.Name
 	user.Password = utils.BcryptHash(password)
 	user.RoleID = appTypes.Admin
-	user.Avatar = "/image/avatar.jpg"
+	user.Avatar = "/image/avatar.png"
 	user.Address = global.Config.Website.Address
 
 	// 在数据库中创建管理员用户

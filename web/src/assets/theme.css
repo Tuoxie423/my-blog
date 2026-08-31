@@ -1,0 +1,368 @@
+/* ============================================================================
+   编辑 / 印刷 brutalist 主题
+   字体：Instrument Serif（衬线展示）+ JetBrains Mono（等宽正文）
+   视觉：暖纸白底、近黑墨字、1px 细线、直角、单一赭石强调色
+   ========================================================================== */
+
+:root:root {
+    color-scheme: light;
+
+    /* 字体 */
+    --font-serif: 'Instrument Serif', 'Songti SC', 'Noto Serif SC', 'STSong', serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', 'Cascadia Mono',
+        'PingFang SC', 'Microsoft YaHei', monospace;
+
+    /* 颜色 */
+    --bg: #f6f4ee;
+    --bg-panel: #fbfaf7;
+    --ink: #1a1714;
+    --ink-2: #4a4640;
+    --ink-3: #8a857c;
+    --line: #d9d4c8;
+    --line-strong: #1a1714;
+    --accent: #c2451f;
+    --accent-soft: #f0e2d9;
+
+    /* ---- Element Plus 主题覆盖 ---- */
+    --el-color-primary: var(--accent);
+    --el-color-primary-light-3: #cf5a3a;
+    --el-color-primary-light-5: #d87d5f;
+    --el-color-primary-light-7: #e3a188;
+    --el-color-primary-light-8: #eab5a1;
+    --el-color-primary-light-9: #f6e4dd;
+    --el-color-primary-dark-2: #9a3518;
+
+    --el-color-danger: #b3261e;
+    --el-color-danger-light-3: #c5534b;
+    --el-color-danger-light-5: #d47f78;
+    --el-color-danger-light-7: #e3aaa5;
+    --el-color-danger-light-8: #eabfbb;
+    --el-color-danger-light-9: #f6e2e0;
+    --el-color-danger-dark-2: #8f1e17;
+
+    --el-font-family: var(--font-mono);
+
+    --el-text-color-primary: var(--ink);
+    --el-text-color-regular: var(--ink-2);
+    --el-text-color-secondary: var(--ink-3);
+    --el-text-color-placeholder: var(--ink-3);
+    --el-text-color-disabled: #b6b0a5;
+
+    --el-border-color: var(--line);
+    --el-border-color-light: var(--line);
+    --el-border-color-lighter: var(--line);
+    --el-border-color-extra-light: var(--line);
+    --el-border-color-dark: var(--ink-3);
+    --el-border-color-darker: var(--ink-2);
+
+    --el-bg-color: var(--bg-panel);
+    --el-bg-color-page: var(--bg);
+    --el-bg-color-overlay: var(--bg-panel);
+
+    --el-fill-color: #efece4;
+    --el-fill-color-light: #f1eee7;
+    --el-fill-color-lighter: #f5f2ec;
+    --el-fill-color-extra-light: #f8f6f1;
+    --el-fill-color-blank: transparent;
+    --el-fill-color-dark: #e4e0d6;
+    --el-fill-color-darker: #d5d0c4;
+
+    --el-border-radius-base: 0;
+    --el-border-radius-small: 0;
+    --el-border-radius-round: 0;
+
+    --el-box-shadow: none;
+    --el-box-shadow-light: none;
+    --el-box-shadow-lighter: none;
+    --el-box-shadow-dark: none;
+
+    --el-disabled-bg-color: #ece9e2;
+    --el-disabled-border-color: var(--line);
+    --el-disabled-text-color: #b6b0a5;
+
+    --el-mask-color: rgba(26, 23, 20, 0.5);
+
+    /* 菜单 */
+    --el-menu-text-color: var(--ink-2);
+    --el-menu-hover-text-color: var(--ink);
+    --el-menu-bg-color: transparent;
+    --el-menu-hover-bg-color: var(--accent-soft);
+    --el-menu-active-color: var(--accent);
+    --el-menu-item-height: 48px;
+    --el-menu-sub-item-height: 42px;
+}
+
+/* ---- 深色模式 ---- */
+:root:root[data-theme='dark'] {
+    color-scheme: dark;
+
+    --bg: #14110f;
+    --bg-panel: #1c1917;
+    --ink: #ece7e0;
+    --ink-2: #b5aca1;
+    --ink-3: #7d756a;
+    --line: #2e2a25;
+    --line-strong: #ece7e0;
+    --accent: #e0693a;
+    --accent-soft: #2a1d15;
+
+    --el-color-primary: var(--accent);
+    --el-color-primary-light-3: #e68054;
+    --el-color-primary-light-5: #d56f42;
+    --el-color-primary-light-7: #b25532;
+    --el-color-primary-light-8: #964527;
+    --el-color-primary-light-9: #3a1f15;
+    --el-color-primary-dark-2: #f0936a;
+
+    --el-color-danger: #e0524d;
+    --el-color-danger-light-3: #d96b66;
+    --el-color-danger-light-5: #b04f4a;
+    --el-color-danger-light-7: #8a3d39;
+    --el-color-danger-light-8: #74322f;
+    --el-color-danger-light-9: #3a1d1b;
+    --el-color-danger-dark-2: #ec7b76;
+
+    --el-text-color-disabled: #6a635a;
+
+    --el-fill-color: #26221e;
+    --el-fill-color-light: #2a2621;
+    --el-fill-color-lighter: #2e2a25;
+    --el-fill-color-extra-light: #332f29;
+    --el-fill-color-blank: transparent;
+    --el-fill-color-dark: #201c18;
+    --el-fill-color-darker: #1a1714;
+
+    --el-disabled-bg-color: #24201c;
+    --el-disabled-border-color: var(--line);
+    --el-disabled-text-color: #6a635a;
+
+    --el-mask-color: rgba(0, 0, 0, 0.7);
+
+    /* 显式覆盖背景/文字/边框，避免残留白色 */
+    --el-bg-color: var(--bg-panel);
+    --el-bg-color-page: var(--bg);
+    --el-bg-color-overlay: var(--bg-panel);
+    --el-card-bg-color: var(--bg-panel);
+    --el-table-bg-color: var(--bg-panel);
+    --el-table-header-bg-color: var(--bg);
+    --el-input-bg-color: var(--bg-panel);
+
+    --el-text-color-primary: var(--ink);
+    --el-text-color-regular: var(--ink-2);
+    --el-text-color-secondary: var(--ink-3);
+    --el-text-color-placeholder: var(--ink-3);
+
+    --el-border-color: var(--line);
+    --el-border-color-light: var(--line);
+    --el-border-color-lighter: var(--line);
+    --el-border-color-extra-light: var(--line);
+    --el-border-color-dark: var(--ink-3);
+    --el-border-color-darker: var(--ink-2);
+}
+
+/* ---- 全局排版与底色 ---- */
+html {
+    background: var(--bg);
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-mono);
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--bg-panel);
+}
+
+a {
+    color: inherit;
+}
+
+/* 统一所有区块/文章标题为衬线 */
+.title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+}
+
+/* 卡片区块标题：加一条赭石短标记，形成统一的编辑式「kicker」 */
+.el-card > .title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.el-card > .title::before {
+    content: '';
+    flex-shrink: 0;
+    width: 20px;
+    height: 2px;
+    background: var(--accent);
+}
+
+.el-avatar {
+    border-radius: 0;
+}
+
+/* 大写等宽元信息标签（通用） */
+.meta-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+}
+
+/* 头像替身：名字首字母 */
+.avatar-initial {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 14px;
+    background: var(--ink);
+    color: var(--bg-panel);
+    border-radius: 0;
+}
+
+/* ---- Element Plus 组件精修 ---- */
+.el-card {
+    background: var(--bg-panel) !important;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+    transition: border-color 0.2s ease;
+}
+.el-card:hover {
+    border-color: var(--line-strong);
+}
+
+.el-table {
+    --el-table-border-color: var(--line);
+    --el-table-header-bg-color: var(--bg);
+    --el-table-header-text-color: var(--ink-3);
+    --el-table-row-hover-bg-color: var(--accent-soft);
+    font-family: var(--font-mono);
+    font-size: 13px;
+}
+.el-table th.el-table__cell {
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--ink-3);
+}
+
+.el-button {
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+    border-radius: 0;
+}
+
+.el-tag {
+    border-radius: 0;
+    font-family: var(--font-mono);
+}
+
+.el-dialog {
+    border-radius: 0;
+    border: 1px solid var(--line-strong);
+}
+.el-dialog__header {
+    font-family: var(--font-serif);
+    font-size: 20px;
+}
+
+.el-drawer {
+    border-left: 1px solid var(--line-strong);
+}
+
+.el-menu {
+    border-right: 1px solid var(--line);
+}
+
+.el-pagination {
+    font-family: var(--font-mono);
+}
+
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select__wrapper {
+    border-radius: 0 !important;
+    box-shadow: 0 0 0 1px var(--line) inset !important;
+}
+
+/* Lucide 图标随字号缩放（默认 24px 固定） */
+.el-icon svg,
+.el-avatar svg {
+    width: 1em;
+    height: 1em;
+}
+.el-input__wrapper.is-focus,
+.el-select__wrapper.is-focused {
+    box-shadow: 0 0 0 1px var(--ink) inset !important;
+}
+
+/* markdown 编辑器 / 预览器跟随主题 */
+.md-editor,
+.md-editor-preview {
+    font-family: var(--font-mono);
+}
+.md-editor h1, .md-editor h2, .md-editor h3,
+.md-editor-preview h1, .md-editor-preview h2, .md-editor-preview h3 {
+    font-family: var(--font-serif);
+}
+
+/* md-editor 深色适配 */
+:root[data-theme='dark'] .md-editor-preview-wrapper,
+:root[data-theme='dark'] .md-editor,
+:root[data-theme='dark'] .md-editor-preview {
+    background-color: var(--bg-panel);
+    color: var(--ink);
+}
+:root[data-theme='dark'] .md-editor-preview-wrapper .md-editor-preview {
+    background-color: transparent;
+    color: var(--ink);
+}
+:root[data-theme='dark'] .md-editor-preview-wrapper p,
+:root[data-theme='dark'] .md-editor-preview-wrapper h1,
+:root[data-theme='dark'] .md-editor-preview-wrapper h2,
+:root[data-theme='dark'] .md-editor-preview-wrapper h3,
+:root[data-theme='dark'] .md-editor-preview-wrapper h4,
+:root[data-theme='dark'] .md-editor-preview-wrapper li,
+:root[data-theme='dark'] .md-editor-preview-wrapper blockquote {
+    color: var(--ink);
+}
+:root[data-theme='dark'] .md-editor-preview-wrapper code {
+    background-color: var(--el-fill-color);
+    color: var(--accent);
+}
+
+/* 入场动效 */
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.rise {
+    animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
