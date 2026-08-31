@@ -38,5 +38,19 @@ export default defineConfig({
                 changeOrigin: true,
             },
         }
+    },
+    build: {
+        chunkSizeWarningLimit: 1000,
+        rollupOptions: {
+            output: {
+                // 把大依赖拆成独立 chunk，可单独缓存、并行加载
+                manualChunks(id: string) {
+                    if (id.includes('node_modules')) {
+                        if (id.includes('element-plus')) return 'element-plus'
+                        if (id.includes('md-editor')) return 'md-editor'
+                    }
+                }
+            }
+        }
     }
 })
