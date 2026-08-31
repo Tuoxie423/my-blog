@@ -1,4 +1,4 @@
-# 托希歌的个人博客
+# 个人博客
 
 一个从零搭建、**前后端分离**的个人博客系统。后端基于 **Go + Gin** 提供 RESTful API，前端基于 **Vue 3 + TypeScript** 构建单页应用，数据层采用 **MySQL + Elasticsearch + Redis** 的组合——关系数据存 MySQL，文章正文与统计存 Elasticsearch 以支撑全文搜索，热榜、浏览量、登录状态等走 Redis 缓存。
 
@@ -154,6 +154,3 @@ npm run dev
 
 （容器化与 `docker-compose` 配置可按需补充。）
 
-## 📄 License
-
-MIT
