@@ -1,5 +1,9 @@
 # 个人博客
 
+## 项目地址：[blog.tuoxie.asia](https://blog.tuoxie.asia)
+
+## 简介
+
 一个从零搭建、**前后端分离**的个人博客系统。后端基于 **Go + Gin** 提供 RESTful API，前端基于 **Vue 3 + TypeScript** 构建单页应用，数据层采用 **MySQL + Elasticsearch + Redis** 的组合——关系数据存 MySQL，文章正文与统计存 Elasticsearch 以支撑全文搜索，热榜、浏览量、登录状态等走 Redis 缓存。
 
 项目覆盖了一个个人博客所需的完整闭环：Markdown 文章发布与全文搜索、标签云、树形评论、多平台热榜聚合、用户注册登录（邮箱 / QQ）、反馈、图片与站点配置管理，并内置前台展示与后台管理两套界面。既可作个人博客直接部署，也可作为前后端分离项目、Go + Vue 技术栈的参考实现。
