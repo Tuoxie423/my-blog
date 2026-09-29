@@ -7,6 +7,9 @@ Thumbs.db
 .vs/
 *.swp
 
+# AI 编程助手
+.claude/
+
 # Go 编译产物 (跨平台)
 *.exe
 *.test

@@ -24,9 +24,13 @@
           {{ websiteStore.state.websiteInfo.icp_filing }}
         </el-link>
         <el-link v-if="securityRecordCode" class="filing" :href="`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${securityRecordCode}`" target="_blank" :underline="false">
+          <img class="filing-icon" src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" alt="公安备案" />
           {{ websiteStore.state.websiteInfo.public_security_filing }}
         </el-link>
-        <span v-else class="filing">{{ websiteStore.state.websiteInfo.public_security_filing }}</span>
+        <span v-else-if="websiteStore.state.websiteInfo.public_security_filing" class="filing">
+          <img class="filing-icon" src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" alt="公安备案" />
+          {{ websiteStore.state.websiteInfo.public_security_filing }}
+        </span>
         <span class="meta-label">建站 {{ websiteStore.state.websiteInfo.created_at }} · 已运行 {{ elapsedTime }}</span>
         <span class="version">{{ websiteStore.state.websiteInfo.version }}</span>
       </div>
@@ -153,6 +157,13 @@ initializeTimer();
       font-family: var(--font-mono);
       font-size: 12px;
       color: var(--ink-3);
+    }
+
+    .filing-icon {
+      width: 14px;
+      height: 14px;
+      margin-right: 4px;
+      vertical-align: -2px;
     }
 
     .version {
