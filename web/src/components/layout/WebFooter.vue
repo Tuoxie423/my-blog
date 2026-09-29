@@ -20,10 +20,13 @@
       </div>
 
       <div class="footer-bottom">
-        <el-link class="filing" href="https://beian.miit.gov.cn/#/Integrated/index" :underline="false">
+        <el-link class="filing" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" :underline="false">
           {{ websiteStore.state.websiteInfo.icp_filing }}
         </el-link>
-        <span class="filing">{{ websiteStore.state.websiteInfo.public_security_filing }}</span>
+        <el-link v-if="securityRecordCode" class="filing" :href="`http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=${securityRecordCode}`" target="_blank" :underline="false">
+          {{ websiteStore.state.websiteInfo.public_security_filing }}
+        </el-link>
+        <span v-else class="filing">{{ websiteStore.state.websiteInfo.public_security_filing }}</span>
         <span class="meta-label">建站 {{ websiteStore.state.websiteInfo.created_at }} · 已运行 {{ elapsedTime }}</span>
         <span class="version">{{ websiteStore.state.websiteInfo.version }}</span>
       </div>
@@ -33,7 +36,7 @@
 
 <script setup lang="ts">
 import {useWebsiteStore} from "@/stores/website";
-import {ref} from "vue";
+import {ref, computed} from "vue";
 import {onUnmounted} from "vue";
 import {type FooterLink, websiteFooterLink} from "@/api/website";
 
@@ -49,6 +52,12 @@ const getFooterLinkList = async () => {
 getFooterLinkList()
 
 const websiteStore = useWebsiteStore()
+
+// 从公安备案号里提取纯数字，作为跳转链接的 recordcode 参数
+const securityRecordCode = computed(() => {
+  const filing = websiteStore.state.websiteInfo.public_security_filing
+  return filing ? filing.replace(/\D/g, '') : ''
+})
 
 let timerId: number | null = null;
 const elapsedTime = ref("");
