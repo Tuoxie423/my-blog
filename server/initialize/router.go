@@ -16,6 +16,8 @@ func InitRouter() *gin.Engine {
 	// 设置gin模式
 	gin.SetMode(global.Config.System.Env)
 	Router := gin.Default()
+	// 记录每个请求的访问日志（IP、路径、方法、状态码、耗时等）
+	Router.Use(middleware.GinLogger())
 	var store = cookie.NewStore([]byte(global.Config.System.SessionsSecret))
 	Router.Use(sessions.Sessions("session", store))
 	// 将指定目录下的文件提供给客户端
