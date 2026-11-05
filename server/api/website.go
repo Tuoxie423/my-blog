@@ -44,7 +44,7 @@ func (website *WebsiteApi) WebsiteCreateFooterLink(c *gin.Context) {
 	var req database.FooterLink
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The link information is invalid.", c)
 		return
 	}
 
@@ -52,10 +52,10 @@ func (website *WebsiteApi) WebsiteCreateFooterLink(c *gin.Context) {
 
 	if err != nil {
 		global.Log.Error("Failed to create footer link:", zap.Error(err))
-		response.FailWithMessage("Failed to create footer link", c)
+		response.FailWithMessage("创建页脚链接失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully created footer link", c)
+	response.OkWithMessage("创建页脚链接成功", c)
 }
 
 // WebsiteDeleteFooterLink 删除页脚链接
@@ -63,7 +63,7 @@ func (website *WebsiteApi) WebsiteDeleteFooterLink(c *gin.Context) {
 	var req database.FooterLink
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The link information is invalid.", c)
 		return
 	}
 
@@ -71,10 +71,10 @@ func (website *WebsiteApi) WebsiteDeleteFooterLink(c *gin.Context) {
 
 	if err != nil {
 		global.Log.Error("Failed to delete footer link:", zap.Error(err))
-		response.FailWithMessage("Failed to delete footer link", c)
+		response.FailWithMessage("删除页脚链接失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully deleted footer link", c)
+	response.OkWithMessage("删除页脚链接成功", c)
 }
 
 func (website *WebsiteApi) WebsiteYiyan(c *gin.Context) {

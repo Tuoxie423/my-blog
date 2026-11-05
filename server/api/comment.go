@@ -18,14 +18,14 @@ func (commentApi *CommentApi) CommentInfoByArticleID(c *gin.Context) {
 	var req request.CommentInfoByArticleID
 	err := c.ShouldBindUri(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The article ID is invalid.", c)
 		return
 	}
 
 	list, err := commentService.CommentInfoByArticleID(req)
 	if err != nil {
 		global.Log.Error("Failed to get comment information:", zap.Error(err))
-		response.FailWithMessage("Failed to get comment information", c)
+		response.FailWithMessage("获取评论失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(list, c)
@@ -36,7 +36,7 @@ func (commentApi *CommentApi) CommentCreate(c *gin.Context) {
 	var req request.CommentCreate
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The comment content is invalid.", c)
 		return
 	}
 
@@ -44,10 +44,10 @@ func (commentApi *CommentApi) CommentCreate(c *gin.Context) {
 	err = commentService.CommentCreate(req)
 	if err != nil {
 		global.Log.Error("Failed to create comment:", zap.Error(err))
-		response.FailWithMessage("Failed to create comment", c)
+		response.FailWithMessage("发表评论失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully created comment", c)
+	response.OkWithMessage("发表评论成功", c)
 }
 
 // CommentDelete 删除评论
@@ -55,17 +55,17 @@ func (commentApi *CommentApi) CommentDelete(c *gin.Context) {
 	var req request.CommentDelete
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The request parameters are invalid.", c)
 		return
 	}
 
 	err = commentService.CommentDelete(c, req)
 	if err != nil {
 		global.Log.Error("Failed to delete comment:", zap.Error(err))
-		response.FailWithMessage("Failed to delete comment", c)
+		response.FailWithMessage("删除评论失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully deleted comment", c)
+	response.OkWithMessage("删除评论成功", c)
 }
 
 // CommentInfo 获取用户评论
@@ -74,7 +74,7 @@ func (commentApi *CommentApi) CommentInfo(c *gin.Context) {
 	list, err := commentService.CommentInfo(uuid)
 	if err != nil {
 		global.Log.Error("Failed to get comment information:", zap.Error(err))
-		response.FailWithMessage("Failed to get comment information", c)
+		response.FailWithMessage("获取评论失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(list, c)
@@ -85,14 +85,14 @@ func (commentApi *CommentApi) CommentList(c *gin.Context) {
 	var pageInfo request.CommentList
 	err := c.ShouldBindQuery(&pageInfo)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The request parameters are invalid.", c)
 		return
 	}
 
 	list, total, err := commentService.CommentList(pageInfo)
 	if err != nil {
 		global.Log.Error("Failed to get comment list:", zap.Error(err))
-		response.FailWithMessage("Failed to get comment list", c)
+		response.FailWithMessage("获取评论列表失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(response.PageResult{

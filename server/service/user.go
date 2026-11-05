@@ -20,7 +20,7 @@ type UserService struct{}
 
 func (userService *UserService) Register(u database.User) (database.User, error) {
 	if !errors.Is(global.DB.Where("email = ?", u.Email).First(&database.User{}).Error, gorm.ErrRecordNotFound) {
-		return database.User{}, errors.New("this email address is already registered, please check the information you filled in, or retrieve your password")
+		return database.User{}, errors.New("该邮箱已被注册，请检查所填信息或找回密码")
 	}
 
 	u.Password = utils.BcryptHash(u.Password)
@@ -42,7 +42,7 @@ func (userService *UserService) EmailLogin(u database.User) (database.User, erro
 	err := global.DB.Where("email = ?", u.Email).First(&user).Error
 	if err == nil {
 		if !utils.BcryptCheck(u.Password, user.Password) {
-			return database.User{}, errors.New("incorrect email or password")
+			return database.User{}, errors.New("用户名或密码错误")
 		}
 		return user, nil
 	}
@@ -117,7 +117,7 @@ func (userService *UserService) UserResetPassword(req request.UserResetPassword)
 		return err
 	}
 	if ok := utils.BcryptCheck(req.Password, user.Password); !ok {
-		return errors.New("original password does not match the current account")
+		return errors.New("原密码不正确")
 	}
 	user.Password = utils.BcryptHash(req.NewPassword)
 	return global.DB.Save(&user).Error

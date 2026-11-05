@@ -14,7 +14,7 @@ type MurmurApi struct{}
 func (m *MurmurApi) MurmurCreate(c *gin.Context) {
 	var req request.MurmurCreate
 	if err := c.ShouldBindJSON(&req); err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The murmur content is invalid.", c)
 		return
 	}
 	var murmur database.Murmur
@@ -22,17 +22,17 @@ func (m *MurmurApi) MurmurCreate(c *gin.Context) {
 	err := murmurService.MurmurCreate(murmur)
 	if err != nil {
 		global.Log.Error(err.Error())
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("发布碎碎念失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully created a new murmur! ", c)
+	response.OkWithMessage("发布碎碎念成功", c)
 
 }
 
 func (m *MurmurApi) MurmurDelete(c *gin.Context) {
 	var ids request.MurmurDelete
 	if err := c.ShouldBindJSON(&ids); err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The request parameters are invalid.", c)
 		return
 	}
 	if len(ids.Ids) == 0 {
@@ -42,10 +42,10 @@ func (m *MurmurApi) MurmurDelete(c *gin.Context) {
 	err := murmurService.MurmurDelete(ids)
 	if err != nil {
 		global.Log.Error(err.Error())
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("删除碎碎念失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully deleted the murmur! ", c)
+	response.OkWithMessage("删除碎碎念成功", c)
 
 }
 
@@ -53,7 +53,7 @@ func (m *MurmurApi) MurmurList(c *gin.Context) {
 	list, err := murmurService.MurmurList()
 	if err != nil {
 		global.Log.Error(err.Error())
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("加载碎碎念失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(list, c)

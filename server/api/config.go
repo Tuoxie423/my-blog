@@ -22,17 +22,17 @@ func (configApi *ConfigApi) UpdateWebsite(c *gin.Context) {
 	var req config.Website
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The website configuration is invalid.", c)
 		return
 	}
 
 	err = configService.UpdateWebsite(req)
 	if err != nil {
 		global.Log.Error("Failed to update website:", zap.Error(err))
-		response.FailWithMessage("Failed to update website", c)
+		response.FailWithMessage("更新网站配置失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully updated website", c)
+	response.OkWithMessage("更新网站配置成功", c)
 }
 
 // GetSystem 获取系统配置
@@ -45,17 +45,17 @@ func (configApi *ConfigApi) UpdateSystem(c *gin.Context) {
 	var req config.System
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The system configuration is invalid.", c)
 		return
 	}
 
 	err = configService.UpdateSystem(req)
 	if err != nil {
 		global.Log.Error("Failed to update system:", zap.Error(err))
-		response.FailWithMessage("Failed to update system", c)
+		response.FailWithMessage("更新系统配置失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully updated system", c)
+	response.OkWithMessage("更新系统配置成功", c)
 }
 
 // GetEmail 获取邮箱配置
@@ -68,17 +68,17 @@ func (configApi *ConfigApi) UpdateEmail(c *gin.Context) {
 	var req config.Email
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The email configuration is invalid.", c)
 		return
 	}
 
 	err = configService.UpdateEmail(req)
 	if err != nil {
 		global.Log.Error("Failed to update email:", zap.Error(err))
-		response.FailWithMessage("Failed to update email", c)
+		response.FailWithMessage("更新邮箱配置失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully updated email", c)
+	response.OkWithMessage("更新邮箱配置成功", c)
 }
 
 // GetQQ 获取QQ登录配置
@@ -91,17 +91,17 @@ func (configApi *ConfigApi) UpdateQQ(c *gin.Context) {
 	var req config.QQ
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The QQ configuration is invalid.", c)
 		return
 	}
 
 	err = configService.UpdateQQ(req)
 	if err != nil {
 		global.Log.Error("Failed to update qq:", zap.Error(err))
-		response.FailWithMessage("Failed to update qq", c)
+		response.FailWithMessage("更新 QQ 配置失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully updated qq", c)
+	response.OkWithMessage("更新 QQ 配置成功", c)
 }
 
 // GetQiniu 获取七牛云配置
@@ -114,17 +114,17 @@ func (configApi *ConfigApi) UpdateQiniu(c *gin.Context) {
 	var req config.Qiniu
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The Qiniu configuration is invalid.", c)
 		return
 	}
 
 	err = configService.UpdateQiniu(req)
 	if err != nil {
 		global.Log.Error("Failed to update qiniu:", zap.Error(err))
-		response.FailWithMessage("Failed to update qiniu", c)
+		response.FailWithMessage("更新七牛配置失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully updated qiniu", c)
+	response.OkWithMessage("更新七牛配置成功", c)
 }
 
 // GetJwt 获取Jwt配置
@@ -137,17 +137,17 @@ func (configApi *ConfigApi) UpdateJwt(c *gin.Context) {
 	var req config.Jwt
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The JWT configuration is invalid.", c)
 		return
 	}
 
 	err = configService.UpdateJwt(req)
 	if err != nil {
 		global.Log.Error("Failed to update jwt:", zap.Error(err))
-		response.FailWithMessage("Failed to update jwt", c)
+		response.FailWithMessage("更新 JWT 配置失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully updated jwt", c)
+	response.OkWithMessage("更新 JWT 配置成功", c)
 }
 
 // GetGaode 获取高德配置
@@ -160,15 +160,15 @@ func (configApi *ConfigApi) UpdateGaode(c *gin.Context) {
 	var req config.Gaode
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The Gaode configuration is invalid.", c)
 		return
 	}
 
 	err = configService.UpdateGaode(req)
 	if err != nil {
 		global.Log.Error("Failed to update gaode:", zap.Error(err))
-		response.FailWithMessage("Failed to update gaode", c)
+		response.FailWithMessage("更新高德配置失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully updated gaode", c)
+	response.OkWithMessage("更新高德配置成功", c)
 }

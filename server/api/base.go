@@ -34,7 +34,7 @@ func (baseApi *BaseApi) Captcha(c *gin.Context) {
 
 	if err != nil {
 		global.Log.Error("Failed to generate captcha:", zap.Error(err))
-		response.FailWithMessage("Failed to generate captcha", c)
+		response.FailWithMessage("生成验证码失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(response.Captcha{
@@ -48,20 +48,20 @@ func (baseApi *BaseApi) SendEmailVerificationCode(c *gin.Context) {
 	var req request.SendEmailVerificationCode
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The email address or verification code is invalid.", c)
 		return
 	}
 	if store.Verify(req.CaptchaID, req.Captcha, true) {
 		err = baseService.SendEmailVerificationCode(c, req.Email)
 		if err != nil {
 			global.Log.Error("Failed to send email:", zap.Error(err))
-			response.FailWithMessage("Failed to send email", c)
+			response.FailWithMessage("发送邮件失败，请稍后重试", c)
 			return
 		}
-		response.OkWithMessage("Successfully sent email", c)
+		response.OkWithMessage("邮件发送成功", c)
 		return
 	}
-	response.FailWithMessage("Incorrect verification code", c)
+	response.FailWithMessage("验证码错误", c)
 }
 
 // QQLoginURL 返回 QQ 登录链接

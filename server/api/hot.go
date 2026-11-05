@@ -11,7 +11,7 @@ type HotApi struct{}
 func (h *HotApi) GetHot(c *gin.Context) {
 	list, err := hotService.GetHotAll()
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("加载热榜失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(list, c)

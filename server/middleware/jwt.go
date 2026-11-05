@@ -25,7 +25,7 @@ func JWTAuth() gin.HandlerFunc {
 		// 检查Refresh Token是否在黑名单中，如果是，则清除Refresh Token并返回未授权错误
 		if jwtService.IsInBlacklist(refreshToken) {
 			utils.ClearRefreshToken(c)
-			response.NoAuth("Account logged in from another location or token is invalid", c)
+			response.NoAuth("登录已失效，请重新登录", c)
 			c.Abort() // 终止请求的后续处理
 			return
 		}
@@ -43,7 +43,7 @@ func JWTAuth() gin.HandlerFunc {
 				if err != nil {
 					// 如果Refresh Token也无法解析，清除Refresh Token并返回未授权错误
 					utils.ClearRefreshToken(c)
-					response.NoAuth("Refresh token expired or invalid", c)
+					response.NoAuth("登录已过期，请重新登录", c)
 					c.Abort()
 					return
 				}
@@ -53,7 +53,7 @@ func JWTAuth() gin.HandlerFunc {
 				if err := global.DB.Select("uuid", "role_id").Take(&user, refreshClaims.UserID).Error; err != nil {
 					// 如果没有找到该用户，清除Refresh Token并返回未授权错误
 					utils.ClearRefreshToken(c)
-					response.NoAuth("The user does not exist", c)
+					response.NoAuth("用户不存在", c)
 					c.Abort()
 					return
 				}
@@ -69,7 +69,7 @@ func JWTAuth() gin.HandlerFunc {
 				if err != nil {
 					// 如果生成新的Access Token失败，清除Refresh Token并返回未授权错误
 					utils.ClearRefreshToken(c)
-					response.NoAuth("Failed to create new access token", c)
+					response.NoAuth("登录凭证生成失败，请重新登录", c)
 					c.Abort()
 					return
 				}
@@ -86,7 +86,7 @@ func JWTAuth() gin.HandlerFunc {
 
 			// 如果Access Token无效且不满足刷新条件，清除Refresh Token并返回未授权错误
 			utils.ClearRefreshToken(c)
-			response.NoAuth("Invalid access token", c)
+			response.NoAuth("登录已失效，请重新登录", c)
 			c.Abort()
 			return
 		}

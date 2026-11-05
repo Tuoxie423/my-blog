@@ -18,14 +18,14 @@ func (articleApi *ArticleApi) ArticleInfoByID(c *gin.Context) {
 	var req request.ArticleInfoByID
 	err := c.ShouldBindUri(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The article ID is invalid.", c)
 		return
 	}
 
 	article, err := articleService.ArticleInfoByID(req.ID)
 	if err != nil {
 		global.Log.Error("Failed to get article information:", zap.Error(err))
-		response.FailWithMessage("Failed to get article information", c)
+		response.FailWithMessage("获取文章失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(article, c)
@@ -36,14 +36,14 @@ func (articleApi *ArticleApi) ArticleSearch(c *gin.Context) {
 	var info request.ArticleSearch
 	err := c.ShouldBindQuery(&info)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The search parameters are invalid.", c)
 		return
 	}
 
 	list, total, err := articleService.ArticleSearch(info)
 	if err != nil {
 		global.Log.Error("Failed to get article search results:", zap.Error(err))
-		response.FailWithMessage("Failed to get article search results", c)
+		response.FailWithMessage("搜索失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(response.PageResult{
@@ -57,7 +57,7 @@ func (articleApi *ArticleApi) ArticleTags(c *gin.Context) {
 	tags, err := articleService.ArticleTags()
 	if err != nil {
 		global.Log.Error("Failed to get article tags:", zap.Error(err))
-		response.FailWithMessage("Failed to get article tags", c)
+		response.FailWithMessage("获取标签失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(tags, c)
@@ -68,7 +68,7 @@ func (articleApi *ArticleApi) ArticleLike(c *gin.Context) {
 	var req request.ArticleLike
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The request parameters are invalid.", c)
 		return
 	}
 
@@ -76,10 +76,10 @@ func (articleApi *ArticleApi) ArticleLike(c *gin.Context) {
 	err = articleService.ArticleLike(req)
 	if err != nil {
 		global.Log.Error("Failed to complete the operation:", zap.Error(err))
-		response.FailWithMessage("Failed to complete the operation", c)
+		response.FailWithMessage("操作失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully completed the operation", c)
+	response.OkWithMessage("操作成功", c)
 }
 
 // ArticleIsLike 返回文章收藏状态，用户是否收藏该文章
@@ -87,7 +87,7 @@ func (articleApi *ArticleApi) ArticleIsLike(c *gin.Context) {
 	var req request.ArticleLike
 	err := c.ShouldBindQuery(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The request parameters are invalid.", c)
 		return
 	}
 
@@ -95,7 +95,7 @@ func (articleApi *ArticleApi) ArticleIsLike(c *gin.Context) {
 	isLike, err := articleService.ArticleIsLike(req)
 	if err != nil {
 		global.Log.Error("Failed to get like status:", zap.Error(err))
-		response.FailWithMessage("Failed to get like status", c)
+		response.FailWithMessage("获取收藏状态失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(isLike, c)
@@ -106,7 +106,7 @@ func (articleApi *ArticleApi) ArticleLikesList(c *gin.Context) {
 	var pageInfo request.ArticleLikesList
 	err := c.ShouldBindQuery(&pageInfo)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The request parameters are invalid.", c)
 		return
 	}
 
@@ -114,7 +114,7 @@ func (articleApi *ArticleApi) ArticleLikesList(c *gin.Context) {
 	list, total, err := articleService.ArticleLikesList(pageInfo)
 	if err != nil {
 		global.Log.Error("Failed to get likes list:", zap.Error(err))
-		response.FailWithMessage("Failed to get likes list", c)
+		response.FailWithMessage("获取收藏列表失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(response.PageResult{
@@ -127,17 +127,17 @@ func (articleApi *ArticleApi) ArticleCreate(c *gin.Context) {
 	var req request.ArticleCreate
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The article content is invalid. Please check and try again.", c)
 		return
 	}
 
 	err = articleService.ArticleCreate(req)
 	if err != nil {
 		global.Log.Error("Failed to create article:", zap.Error(err))
-		response.FailWithMessage("Failed to create article", c)
+		response.FailWithMessage("发布文章失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully created article", c)
+	response.OkWithMessage("发布文章成功", c)
 }
 
 // ArticleDelete 删除文章
@@ -145,17 +145,17 @@ func (articleApi *ArticleApi) ArticleDelete(c *gin.Context) {
 	var req request.ArticleDelete
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The request parameters are invalid.", c)
 		return
 	}
 
 	err = articleService.ArticleDelete(req)
 	if err != nil {
 		global.Log.Error("Failed to delete article:", zap.Error(err))
-		response.FailWithMessage("Failed to delete article", c)
+		response.FailWithMessage("删除文章失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully deleted article", c)
+	response.OkWithMessage("删除文章成功", c)
 }
 
 // ArticleUpdate 更新文章
@@ -163,17 +163,17 @@ func (articleApi *ArticleApi) ArticleUpdate(c *gin.Context) {
 	var req request.ArticleUpdate
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The article content is invalid. Please check and try again.", c)
 		return
 	}
 
 	err = articleService.ArticleUpdate(req)
 	if err != nil {
 		global.Log.Error("Failed to update article:", zap.Error(err))
-		response.FailWithMessage("Failed to update article", c)
+		response.FailWithMessage("更新文章失败，请稍后重试", c)
 		return
 	}
-	response.OkWithMessage("Successfully updated article", c)
+	response.OkWithMessage("更新文章成功", c)
 }
 
 // ArticleList 获取文章列表
@@ -181,14 +181,14 @@ func (articleApi *ArticleApi) ArticleList(c *gin.Context) {
 	var pageInfo request.ArticleList
 	err := c.ShouldBindQuery(&pageInfo)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage("The request parameters are invalid.", c)
 		return
 	}
 
 	list, total, err := articleService.ArticleList(pageInfo)
 	if err != nil {
 		global.Log.Error("Failed to get article list:", zap.Error(err))
-		response.FailWithMessage("Failed to get article list", c)
+		response.FailWithMessage("获取文章列表失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(response.PageResult{
