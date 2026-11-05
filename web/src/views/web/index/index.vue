@@ -7,6 +7,7 @@
             <div class="quote-block">
               <p class="meta-label">今日一言</p>
               <blockquote class="quote-text">「{{ quote }}」</blockquote>
+              <p class="quote-author">—— 来自 UApiPro</p>
             </div>
             <router-link class="hot-link" to="/news">
               查看热榜 <span class="arrow">↗</span>
@@ -90,7 +91,7 @@ getQuote()
 
             .quote-author {
               font-family: var(--font-mono);
-              font-size: 13px;
+              font-size: 15px;
               color: var(--ink-3);
               margin: 0;
             }
