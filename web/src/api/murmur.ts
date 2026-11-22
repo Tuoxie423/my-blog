@@ -6,6 +6,16 @@ export interface Murmur {
     content: string;
     created_at: string;
     updated_at: string;
+    likes: number;
+}
+
+export interface MurmurWithLiked extends Murmur {
+    is_liked: boolean;
+}
+
+export interface MurmurLikeResult {
+    is_liked: boolean;
+    likes: number;
 }
 
 export const murmurAll = (): Promise<ApiResponse<Murmur[]>> => {
@@ -36,5 +46,24 @@ export const murmurDelete = (data: MurmurDeleteRequest): Promise<ApiResponse<und
         url: '/murmur/delete',
         method: 'delete',
         data: data,
+    })
+}
+
+export interface MurmurLikeRequest {
+    murmur_id: number;
+}
+
+export const murmurLike = (data: MurmurLikeRequest): Promise<ApiResponse<MurmurLikeResult>> => {
+    return service({
+        url: '/murmur/like',
+        method: 'post',
+        data: data,
+    })
+}
+
+export const murmurLiked = (): Promise<ApiResponse<number[]>> => {
+    return service({
+        url: '/murmur/liked',
+        method: 'get',
     })
 }

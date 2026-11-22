@@ -10,7 +10,7 @@ import {
     Search, Plus, Trash2, Eye, Star, ArrowDown, ArrowUp, User, PenLine,
     Upload, Home, Monitor, Contact, MessageSquare, MessageCircle, UserCog,
     FileText, Newspaper, Files, Image, Settings, Link, ScrollText, Megaphone,
-    PanelLeftClose, PanelLeftOpen, LockKeyholeOpen, Mail, Sun, Moon, Menu, X, Feather
+    PanelLeftClose, PanelLeftOpen, LockKeyholeOpen, Mail, Sun, Moon, Menu, X, Feather, ThumbsUp
 } from 'lucide-vue-next'
 import App from './App.vue'
 import router from './router'
@@ -26,7 +26,7 @@ const icons: Record<string, any> = {
     SetUp: UserCog, Document: FileText, Collection: Newspaper, ChatLineRound: MessageSquare,
     DocumentCopy: Files, Picture: Image, PictureRounded: Image, Coin: Settings,
     Position: MessageSquare, Connection: Megaphone, Link, memo: ScrollText, setting: Settings,
-    Fold: PanelLeftClose, Expand: PanelLeftOpen, Sun, Moon, Menu, X, Feather,
+    Fold: PanelLeftClose, Expand: PanelLeftOpen, Sun, Moon, Menu, X, Feather, ThumbsUp,
 }
 
 for (const [name, component] of Object.entries(icons)) {
