@@ -360,5 +360,8 @@ router.beforeEach((to, from, next) => {
         } else {
             next(); // 不需要登录，继续访问
         }
+    }).catch(() => {
+        // 后端不可用时放行，由全局维护页接管，避免路由卡死导致白屏
+        next()
     })
 });

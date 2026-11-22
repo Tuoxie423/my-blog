@@ -2,9 +2,11 @@
 <html lang="zh">
   <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23c2451f'/%3E%3C/svg%3E">
+    <!-- 本地兜底图标：后端不可用时也能正常显示 -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <!-- 兜底标题：后端正常时会被 /api/website/info 返回的 title 覆盖 -->
+    <title>托希歌的个人博客</title>
     <script>
       (function () {
         var saved = localStorage.getItem('theme');

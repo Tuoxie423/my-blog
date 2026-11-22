@@ -4,6 +4,8 @@ import 'vue-router';
 
 export interface ImportMetaEnv {
     VITE_SERVER_URL: string
+    VITE_BASE_API: string
+    VITE_CONTACT_EMAIL_B64: string
 }
 
 

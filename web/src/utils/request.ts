@@ -3,6 +3,7 @@ import type {AxiosRequestConfig, AxiosResponse, AxiosError, InternalAxiosRequest
 import {useUserStore} from '@/stores/user';
 import router from '@/router/index';
 import {useLayoutStore} from "@/stores/layout";
+import {useMaintenanceStore} from "@/stores/maintenance";
 
 const service = axios.create({
     baseURL: import.meta.env.VITE_BASE_API,
@@ -60,20 +61,17 @@ service.interceptors.response.use(
         return response.data
     },
     (error: AxiosError) => {
-        if (!error.response) {
-            ElMessageBox.confirm(`
-        <p>检测到请求错误</p>
-        <p>${error.message}</p>
-      `, '请求报错', {
-                dangerouslyUseHTMLString: true,
-                distinguishCancelAndClose: true,
-                confirmButtonText: '稍后重试',
-                cancelButtonText: '取消',
-            }).then()
+        const status = error.response?.status
+        const isTimeout = error.code === 'ECONNABORTED' || error.code === 'ETIMEDOUT'
+        const isUnavailable = status === 502 || status === 503 || status === 504
+
+        // 后端不可用（连不上、超时、502/503/504）时交给全局维护页兜底，不再弹阻塞对话框
+        if (!error.response || isTimeout || isUnavailable) {
+            useMaintenanceStore().markOffline()
             return Promise.reject(error)
         }
 
-        switch (error.response.status) {
+        switch (status) {
             case 500:
                 return handleSpecificError(500, error)
             case 404:

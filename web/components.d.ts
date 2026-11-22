@@ -58,6 +58,7 @@ declare module 'vue' {
     ForgotPasswordForm: typeof import('./src/components/forms/ForgotPasswordForm.vue')['default']
     LoginForm: typeof import('./src/components/forms/LoginForm.vue')['default']
     Logo: typeof import('./src/components/widgets/Logo.vue')['default']
+    MaintenancePage: typeof import('./src/components/common/MaintenancePage.vue')['default']
     PasswordResetForm: typeof import('./src/components/forms/PasswordResetForm.vue')['default']
     ProfileCard: typeof import('./src/components/pages/ProfileCard.vue')['default']
     RegisterForm: typeof import('./src/components/forms/RegisterForm.vue')['default']
