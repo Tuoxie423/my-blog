@@ -15,11 +15,15 @@ type CountDB struct {
 	Index string
 }
 
+// Incr 在原有基础上加一并返回最新值
+func (c CountDB) Incr(id string) (int, error) {
+	num, err := global.Redis.HIncrBy(c.Index, id, 1).Result()
+	return int(num), err
+}
+
 // Set 在原有基础上加一
 func (c CountDB) Set(id string) error {
-	num, _ := global.Redis.HGet(c.Index, id).Int()
-	num++
-	err := global.Redis.HSet(c.Index, id, num).Err()
+	_, err := c.Incr(id)
 	return err
 }
 

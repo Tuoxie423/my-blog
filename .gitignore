@@ -32,3 +32,6 @@ server/*.json
 
 # 讲解文档
 server/docs/
+
+# 宣传视频工作目录
+promo-video/

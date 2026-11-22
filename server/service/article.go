@@ -24,12 +24,17 @@ type ArticleService struct {
 }
 
 func (articleService *ArticleService) ArticleInfoByID(id string) (elasticsearch.Article, error) {
-	// 异步更新浏览量
-	go func() {
-		articleView := articleService.NewArticleView()
-		_ = articleView.Set(id)
-	}()
-	return articleService.Get(id)
+	article, err := articleService.Get(id)
+	if err != nil {
+		return article, err
+	}
+	// 仅统计真实存在的文章，避免 latest、1 这类非法 id 写入缓存
+	// 实时浏览量 = ES 中已同步的值 + Redis 中尚未同步的增量
+	articleView := articleService.NewArticleView()
+	if pending, err := articleView.Incr(id); err == nil {
+		article.Views += pending
+	}
+	return article, nil
 }
 
 func (articleService *ArticleService) ArticleSearch(info request.ArticleSearch) (interface{}, int64, error) {
