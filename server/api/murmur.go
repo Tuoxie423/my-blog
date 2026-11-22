@@ -1,12 +1,15 @@
 package api
 
 import (
+	"errors"
 	"server/global"
 	"server/model/database"
 	"server/model/request"
 	"server/model/response"
+	"server/utils"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type MurmurApi struct{}
@@ -57,4 +60,48 @@ func (m *MurmurApi) MurmurList(c *gin.Context) {
 		return
 	}
 	response.OkWithData(list, c)
+}
+
+// MurmurLike 点赞/取消点赞（切换）
+func (m *MurmurApi) MurmurLike(c *gin.Context) {
+	var req request.MurmurLike
+	if err := c.ShouldBindJSON(&req); err != nil {
+		response.FailWithMessage("The request parameters are invalid.", c)
+		return
+	}
+
+	req.UserID = utils.GetUserID(c)
+	if req.UserID == 0 {
+		response.NoAuth("请先登录", c)
+		return
+	}
+
+	result, err := murmurService.MurmurLike(req)
+	if err != nil {
+		global.Log.Error(err.Error())
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			response.FailWithMessage("碎碎念不存在或已删除", c)
+			return
+		}
+		response.FailWithMessage("操作失败，请稍后重试", c)
+		return
+	}
+	response.OkWithData(result, c)
+}
+
+// MurmurLiked 当前用户点过赞的碎碎念 ID 列表
+func (m *MurmurApi) MurmurLiked(c *gin.Context) {
+	userID := utils.GetUserID(c)
+	if userID == 0 {
+		response.NoAuth("请先登录", c)
+		return
+	}
+
+	ids, err := murmurService.MurmurLiked(userID)
+	if err != nil {
+		global.Log.Error(err.Error())
+		response.FailWithMessage("加载点赞状态失败，请稍后重试", c)
+		return
+	}
+	response.OkWithData(ids, c)
 }

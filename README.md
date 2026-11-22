@@ -83,18 +83,18 @@ myBlog/
 ```bash
 cd server
 
-# ① 创建配置文件（config.yaml 已被 gitignore，需手动创建，见下方「配置说明」）
+# 创建配置文件（config.yaml 已被 gitignore，需手动创建，见下方「配置说明」）
 
-# ② 初始化 MySQL 表结构
+# 初始化 MySQL 表结构
 go run . -sql
 
-# ③ 初始化 Elasticsearch 索引
+# 初始化 Elasticsearch 索引
 go run . -es
 
-# ④ 创建管理员账号（交互式输入邮箱和密码）
+# 创建管理员账号（交互式输入邮箱和密码）
 go run . -admin
 
-# ⑤ 启动服务（默认 8080）
+# 启动服务（默认 8080）
 go run .
 ```
 

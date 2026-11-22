@@ -18,5 +18,6 @@ func SQL() error {
 		&database.Login{},
 		&database.User{},
 		&database.Murmur{},
+		&database.MurmurLike{},
 	)
 }
