@@ -62,7 +62,7 @@ func (m *MurmurApi) MurmurList(c *gin.Context) {
 	response.OkWithData(list, c)
 }
 
-// MurmurLike 点赞/取消点赞（切换）
+// MurmurLike 切换赞同状态
 func (m *MurmurApi) MurmurLike(c *gin.Context) {
 	var req request.MurmurLike
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -100,7 +100,7 @@ func (m *MurmurApi) MurmurLiked(c *gin.Context) {
 	ids, err := murmurService.MurmurLiked(userID)
 	if err != nil {
 		global.Log.Error(err.Error())
-		response.FailWithMessage("加载点赞状态失败，请稍后重试", c)
+		response.FailWithMessage("加载赞同状态失败，请稍后重试", c)
 		return
 	}
 	response.OkWithData(ids, c)

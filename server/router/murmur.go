@@ -19,7 +19,7 @@ func (m *MurmurRouter) InitMurmurRouter(Router *gin.RouterGroup, PublicRouter *g
 
 	}
 	{
-		// 登录用户即可点赞，不需要管理员权限
+		// 登录用户即可赞同，不需要管理员权限
 		murmurPrivateRouter.POST("like", murmurApi.MurmurLike)
 		murmurPrivateRouter.GET("liked", murmurApi.MurmurLiked)
 	}
